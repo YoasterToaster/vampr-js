@@ -10,22 +10,26 @@ class Vampire {
 
   // Adds the vampire as an offspring of this vampire
   addOffspring(vampire) {
-
+    this.offspring.push(vampire); // Adds the vampire to the array of offspring
+    vampire.creator = this; //Sets the parent of the pushed vampire to this one
   }
 
   // Returns the total number of vampires created by that vampire
   get numberOfOffspring() {
-
+    return this.offspring.length;
   }
 
   // Returns the number of vampires away from the original vampire this vampire is
   get numberOfVampiresFromOriginal() {
-
+    if (this.creator === null){
+      return 0;
+    }
+    return 1 + this.creator.numberOfVampiresFromOriginal;
   }
 
   // Returns true if this vampire is more senior than the other vampire. (Who is closer to the original vampire)
   isMoreSeniorThan(vampire) {
-
+      return vampire.numberOfVampiresFromOriginal > this.numberOfVampiresFromOriginal;
   }
 
   /** Stretch **/
